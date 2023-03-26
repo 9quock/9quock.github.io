@@ -24,10 +24,22 @@
 </style>
 </body>
 <script type="text/javascript">
-	var x = document.getElementById("fun"); 
+var x = document.getElementById("fun");
+var y = document.getElementById("button");
 
 function pA() { 
-  x.play(); 
-} 
+  x.play();
+  bG();
+}
+
+function bG() {
+	y.style.background = "url('t.jpeg')";
+	y.disabled = true;
+}
+
+x.onended = function() {
+  y.style.background = "url('')";
+	y.disabled = false;
+};
 </script>
 </html>
