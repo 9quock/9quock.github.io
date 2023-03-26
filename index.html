@@ -20,6 +20,7 @@
   	height: 100%;
   	width: 100%;
   	font-size: 1000%;
+  	background-size: cover;
   }
 </style>
 </body>
@@ -33,12 +34,15 @@ function pA() {
 }
 
 function bG() {
-	y.style.background = "url('t.jpeg') cover";
+	y.style.background = "url('t.jpeg')";
+	y.style.backgroundSize = "cover";
+	y.style.color = "transparent";
 	y.disabled = true;
 }
 
 x.onended = function() {
   y.style.background = "url('')";
+  y.style.color = "black";
 	y.disabled = false;
 };
 </script>
