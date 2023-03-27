@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=1024">
+	<title>(NOT)Fun</title>
+</head>
+<body>
+	<audio id="fun"><source src="l.mp3" type="audio/mpeg"></audio>
+<div class="full-screen" style="height: 100%; width: 100%; display: block;">
+	<button id="button" onclick="pA();">Click me!</button>
+</div>
+<style type="text/css">
+	html, body{
+   height: 100%;
+   margin: 0px;
+   padding: 0px;
+  }
+  #button {
+  	height: 100%;
+  	width: 100%;
+  	font-size: 1000%;
+  	background-size: cover;
+  }
+</style>
+</body>
+<script type="text/javascript">
+var x = document.getElementById("fun");
+var y = document.getElementById("button");
+
+function pA() { 
+  x.play();
+  bG();
+}
+
+function bG() {
+	y.style.background = "url('t.jpeg')";
+	y.style.backgroundSize = "100% 100%";
+	y.style.color = "transparent";
+	y.disabled = true;
+}
+
+x.onended = function() {
+  y.style.background = "url('')";
+  y.style.color = "black";
+	y.disabled = false;
+};
+</script>
+</html>
