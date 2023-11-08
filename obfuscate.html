@@ -1,0 +1,43 @@
+<style>
+  body{
+    margin: 50px auto;
+  }
+  #c{
+    margin: 0 auto;
+    width: 500px;
+    max-width:90%;
+    display: grid;
+    grid-template-rows: 4fr 1fr 1fr;
+    grid-row-gap: 10px;
+  }
+  #c > * {
+    width: 100%;
+  }
+</style>
+
+<center>Obfuscate JS code</center>
+<br>
+<div id=c>
+<textarea id="i" spellcheck="false" placeholder="code"></textarea>
+<button onclick="buttonClicked()">Generate</button>
+<input id="o" spellcheck="false" placeholder="output" readonly>
+</div>
+
+<script>
+function generate(code) {
+	let out = ""
+	for (let i = 0; i < code.length; i++) {
+		out += "%uDB40%uDD" + code.charCodeAt(i).toString(16)
+	}
+	out = "eval(unescape(escape`" + unescape(out) + "`.replace(/u.{8}/g,'')))"
+  return out
+}
+
+function buttonClicked() {
+    if (!document.getElementById('i').value.includes("\n")) {
+      document.getElementById('o').value = (generate(document.getElementById('i').value))
+    } else {
+      document.getElementById('o').value = "You can't have new lines in your code!"
+    }
+}
+</script>
