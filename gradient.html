@@ -1,0 +1,68 @@
+<html>
+<body>
+<input type="color" id="c1"/>
+<input type="color" id="c2"/>
+<br><textarea id="tx" spellcheck=false></textarea>
+<br><button onclick="gradient()">Make a gradient</button>
+<br><br><br>
+<input id="ou" readonly spellcheck=false>
+</body>
+<script>
+function hexToRgb(hex) {
+  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result ? {
+    r: parseInt(result[1], 16),
+    g: parseInt(result[2], 16),
+    b: parseInt(result[3], 16)
+  } : null;
+}
+
+function interpolateRGB(startColor, endColor, segments) {
+  const startR = startColor.r;
+  const startG = startColor.g;
+  const startB = startColor.b;
+  const endR = endColor.r;
+  const endG = endColor.g;
+  const endB = endColor.b;
+  const steps = segments - 1;
+
+  const stepR = (endR - startR) / steps;
+  const stepG = (endG - startG) / steps;
+  const stepB = (endB - startB) / steps;
+
+  let currentR = startR;
+  let currentG = startG;
+  let currentB = startB;
+
+  const colors = [];
+
+  for (let i = 0; i <= steps; i++) {
+    colors.push(`\\033[38;2;${Math.round(currentR)};${Math.round(currentG)};${Math.round(currentB)}m`);
+
+    currentR += stepR;
+    currentG += stepG;
+    currentB += stepB;
+  }
+
+  return colors;
+}
+
+function gradient() {
+  const rows = document.getElementById("tx").value.split("\n");
+  const startColor = hexToRgb(document.getElementById("c1").value);
+  const endColor = hexToRgb(document.getElementById("c2").value);
+  const steps = rows.length;
+  
+  const gradient = interpolateRGB(startColor, endColor, steps);
+  
+  let out = "";
+
+  for (let i = 0; i < rows.length; i++) {
+    out += gradient[i] + "\\n" + rows[i];
+  }
+  
+  document.getElementById("ou").value = out + "\\033[00m";
+}
+</script>
+</html>
+
