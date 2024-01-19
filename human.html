@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Humans</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <iframe id="iframe" src="https://thispersondoesnotexist.com"></iframe>
+  <script>
+    var iframe = document.getElementById('iframe')
+    var src = iframe.src
+    setInterval(function(){
+      iframe.src = "about:blank"
+      iframe.src = src
+    }, 1000);
+  </script>
+</body>
+</html>
